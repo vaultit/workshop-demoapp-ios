@@ -1,0 +1,6 @@
+framework module VaultITMobileSSOFramework {
+  umbrella header "VaultITMobileSSOFramework-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13770" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13770"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="DemoApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOGGED IN AS:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fYx-U4-3ha">
+                                <rect key="frame" x="112" y="40" width="151" height="25.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test user name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KR9-Q2-FR7">
+                                <rect key="frame" x="116" y="81.5" width="143.5" height="26.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x9s-I3-4y8">
+                                <rect key="frame" x="156" y="611" width="62" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="didClickLogout:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QGh-NE-WVZ"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="8Pq-1U-dV0">
+                                <rect key="frame" x="88" y="275" width="198" height="116"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Od7-tu-YOl">
+                                        <rect key="frame" x="0.0" y="0.0" width="198" height="48"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
+                                        <state key="normal" title="Restore session"/>
+                                        <connections>
+                                            <action selector="didClickRestoreSession:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Lj7-WI-m6y"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xrP-t3-XOY">
+                                        <rect key="frame" x="0.0" y="68" width="198" height="48"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
+                                        <state key="normal" title="Login"/>
+                                        <connections>
+                                            <action selector="didClickLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="phg-4H-NgF"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="43z-o2-Lol">
+                                <rect key="frame" x="65.5" y="571" width="245.5" height="24"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SESSION STATUS:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t3f-sd-hKE">
+                                        <rect key="frame" x="0.0" y="0.0" width="164.5" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ONLINE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UPs-GS-GNC">
+                                        <rect key="frame" x="174.5" y="0.0" width="71" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="43z-o2-Lol" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="JpF-7d-khf"/>
+                            <constraint firstItem="KR9-Q2-FR7" firstAttribute="centerX" secondItem="fYx-U4-3ha" secondAttribute="centerX" id="RIc-GV-3ov"/>
+                            <constraint firstItem="KR9-Q2-FR7" firstAttribute="top" secondItem="fYx-U4-3ha" secondAttribute="bottom" constant="16" id="dX9-l1-gKm"/>
+                            <constraint firstItem="fYx-U4-3ha" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="jqs-pJ-md8"/>
+                            <constraint firstItem="x9s-I3-4y8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="moB-KQ-ufv"/>
+                            <constraint firstItem="x9s-I3-4y8" firstAttribute="top" secondItem="43z-o2-Lol" secondAttribute="bottom" constant="16" id="nJV-a4-URs"/>
+                            <constraint firstItem="fYx-U4-3ha" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="o9e-rW-GoQ"/>
+                            <constraint firstItem="8Pq-1U-dV0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="t8x-NY-VI6"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="x9s-I3-4y8" secondAttribute="bottom" constant="20" id="xC5-dP-9MI"/>
+                            <constraint firstItem="8Pq-1U-dV0" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="yWz-fd-LET"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="loggedInHeader" destination="fYx-U4-3ha" id="NPp-J4-e7q"/>
+                        <outlet property="loginActionsContainer" destination="8Pq-1U-dV0" id="MfR-dN-36C"/>
+                        <outlet property="loginButton" destination="xrP-t3-XOY" id="HQ7-5P-qTc"/>
+                        <outlet property="logoutButton" destination="x9s-I3-4y8" id="A9i-FA-i7f"/>
+                        <outlet property="sessionStatusContainer" destination="43z-o2-Lol" id="Dmo-mz-Q6c"/>
+                        <outlet property="sessionStatusLabel" destination="UPs-GS-GNC" id="LbH-h8-vnu"/>
+                        <outlet property="userNameLabel" destination="KR9-Q2-FR7" id="s5z-xB-LfP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>
