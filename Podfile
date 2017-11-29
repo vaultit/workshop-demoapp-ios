@@ -1,5 +1,5 @@
 source 'https://github.com/CocoaPods/Specs.git'
-source 'https://git.vaultit.org/nordiceid/mobilesso-ios-podspec.git'
+source 'https://github.com/vaultit/mobilesso-ios-podspec.git'
 
 # Uncomment the next line to define a global platform for your project
 platform :ios, '9.0'
@@ -9,6 +9,6 @@ target 'DemoApp' do
   use_frameworks!
 
   # Pods for DemoApp
-  pod 'VaultITMobileSSOFramework', '~> 0.4.6'
+  pod 'VaultITMobileSSOFramework', '~> 0.4.9'
 
 end

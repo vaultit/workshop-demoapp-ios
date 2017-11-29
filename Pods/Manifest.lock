@@ -1,27 +1,27 @@
 PODS:
   - Alamofire (4.5.0)
   - AppAuth (0.9.1)
-  - ObjectMapper (3.0.0)
+  - ObjectMapper (3.1.0)
   - ReachabilitySwift (3)
   - SwiftKeychainWrapper (3.0.1)
-  - VaultITMobileSSOFramework (0.4.6):
+  - VaultITMobileSSOFramework (0.4.9):
     - Alamofire (= 4.5)
     - AppAuth (= 0.9.1)
-    - ObjectMapper (= 3.0.0)
+    - ObjectMapper (= 3.1.0)
     - ReachabilitySwift (= 3)
     - SwiftKeychainWrapper (= 3.0.1)
 
 DEPENDENCIES:
-  - VaultITMobileSSOFramework (~> 0.4.6)
+  - VaultITMobileSSOFramework (~> 0.4.9)
 
 SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
   AppAuth: f7d9a2ce4ffe79a62a8b0c1d0938e88d9809b846
-  ObjectMapper: 92230db59bf8f341a5c3a3cf0b9fbdde3cf0d87f
+  ObjectMapper: 20505058f54e5c3ca69e1d6de9897d152a5369a6
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
-  VaultITMobileSSOFramework: 9c19646252d7773741e0bc331adea73357f535f6
+  VaultITMobileSSOFramework: 4f60f8ec5a9dfce6e68c0addd469c75bde8381c5
 
-PODFILE CHECKSUM: 640f718598b81ddddeac36d857514afec2a063f0
+PODFILE CHECKSUM: b19dd5b139f4dd1ec573f1f662bdf6ce347adf73
 
 COCOAPODS: 1.2.0

@@ -48,17 +48,25 @@ Modify the newly created Podfile by adding the private Pod source to it. Put the
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
-source 'https://git.vaultit.org/nordiceid/mobilesso-ios-podspec.git'
+source 'https://github.com/vaultit/mobilesso-ios-podspec.git'
 ```
 
 and by adding the following line inside your app target in the Podfile:
 
 ```ruby
 target 'YourApp' do
-    pod 'VaultITMobileSSOFramework', '~> 0.4.6'
+    pod 'VaultITMobileSSOFramework', '~> 0.4.7'
     # Your other pods here
 end
 ```
+
+If you want to support older iOS versions, uncomment the generated line:
+
+```ruby
+platform :ios, '9.0'
+```
+
+Since using iOS 11 for the app target will drop 32-bit build support, defining a lower version is required to build the project for e.g. iPhone 5. The minimum supported version for the framework is 9.0.
 
 Finally, run:
 
@@ -71,17 +79,17 @@ dependencies together. Open it up and build your project.
 
 #### Add to a project already using CocoaPods
 
-First add these two lines to the top of your Podfile (the first one is the :
+First add these two lines to the top of your Podfile (the first one is the default Pod repository, but it must be listed if there is more than one):
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
-source 'https://git.vaultit.org/nordiceid/mobilesso-ios-podspec.git'
+source 'https://github.com/vaultit/mobilesso-ios-podspec.git'
 ```
 
 Then simply add the line
 
 ```ruby
-pod 'VaultITMobileSSOFramework', '~> 0.4.6'
+pod 'VaultITMobileSSOFramework', '~> 0.4.7'
 ```
 
 to your Podfile inside your app target. Then run `pod update`. If your Pod repositories are up-to-date, a simple `pod install` might be enough instead.
@@ -92,7 +100,7 @@ To avoid saving sensitive keys to a git repository, you should create a file (na
 root folder of the application and add the following "Run script" phase to your project:
 
 ```bash
-INFO_PLIST="${TARGET_BUILD_DIR}/${INFO_PLIST_PATH}"
+INFO_PLIST="${TARGET_BUILD_DIR}/${INFOPLIST_PATH}"
 CLIENT_SECRET=`cat ${SCRIPT_INPUT_FILE_0}`
 /usr/libexec/Plistbuddy -c "Set :MobileSSOClientSecret ${CLIENT_SECRET}" $INFO_PLIST
 ```
@@ -105,12 +113,12 @@ Also, add the file with the key as an input file to the script.
 |------------------------------	|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|------------------------------------------------------------------------	|
 | MobileSSOClientId            	| The client id string.                                                                                                                                                                                                                                                                                                                                                                                                          	|                                                                        	|
 | MobileSSOIssuerURL           	| The URL of the GLUU authentication server.                                                                                                                                                                                                                                                                                                                                                                                     	|                                                                        	|
-| CFBundleURLTypes                     | This describes the custom URL schemes used by your app (should match the login and logout redirect URLs). | URL Types: An array with one value: CFBundleURLSchemes (type array). CFBundleURLSchemes is again an array with the schemes (string type, e.g. "com.company.yourapp") |
-| MobileSSOLoginRedirectURI    	| A custom-schemed login redirect URI that will be captured  by your app and handled by VaultITMobileSSOFramework.  This is the URL the system Safari browser will redirect when login is successful  and it will be used to capture the event and dismiss the browser.                                                                                                                                                                 	| com.company.yourapp://oidc_login                                     	|
-| MobileSSOLogoutRedirectURI   	| A custom-schemed redirect URI that will be captured by your app and  handled by VaultITMobileSSOFramework.This is the URL the system Safari  browser will redirect when logout is successful and it will be used to capture the  event and dismiss the browser.                                                                                                                                                                       	| com.company.yourapp://oidc_logout                                    	|
-| MobileSSOBankIdResumeURI | If you use bankid you must set this redirect URI as well. Logging in with BankID from the same device requires an intermediate redirect from the BankID app back to your application. The VaultITMobileSSOFramework will handle all this automatically as long as this parameter is supplied. The scheme must match your app's bundle id. | com.company.yourapp://bankid_continue |
-| MobileSSOKeychainServiceName 	| By default it is recommended to set this simply to the ${PRODUCT_BUNDLE_IDENTIFIER}  environment variable. This will resolve to e.g. "com.company.yourapp". If you want to use keychain sharing however, this value needs to be same across all your apps sharing data. | ${PRODUCT_BUNDLE_IDENTIFIER} or "a_common_name_for_all_apps"                                                                                                       	|                                	|
-| MobileSSOKeychainAccessGroup 	| Sessions stored in the keychain can be shared with other apps in the same keychain access group. Go to the "Capabilities" tab of your project settings, enable keychain sharing and enter an access group name that is shared between all your apps. Then set this property as:$(AppIdentifierPrefix)group_namewhere "group_name" is the access group name you chose. The $(AppIdentifierPrefix) will resolve to your team id. 	| $(AppIdentifierPrefix)example_group_name                                                                       	|
+| CFBundleURLTypes                     | This describes the custom URL schemes used by your app (should match the login and logout redirect URLs). | URL Types: An array with one value: CFBundleURLSchemes (type array). CFBundleURLSchemes is again an array with the schemes (string type). Just put ${PRODUCT_BUNDLE_IDENTIFIER} here so it auto-resolves to match your app. |
+| MobileSSOLoginRedirectURI    	| A custom-schemed login redirect URI that will be captured  by your app and handled by VaultITMobileSSOFramework.  This is the URL the system Safari browser will redirect when login is successful  and it will be used to capture the event and dismiss the browser. Easiest way is to prefix all the URLs with ${PRODUCT_BUNDLE_IDENTIFIER} so they auto-resolve to match your app. 	| ${PRODUCT_BUNDLE_IDENTIFIER}://oidc_login                                     	|
+| MobileSSOLogoutRedirectURI   	| A custom-schemed redirect URI that will be captured by your app and  handled by VaultITMobileSSOFramework.This is the URL the system Safari  browser will redirect when logout is successful and it will be used to capture the  event and dismiss the browser. Easiest way is to prefix all the URLs with ${PRODUCT_BUNDLE_IDENTIFIER} so they auto-resolve to match your app.  	| ${PRODUCT_BUNDLE_IDENTIFIER}://oidc_logout                                    	|
+| MobileSSOBankIdResumeURI | If you use bankid you must set this redirect URI as well. Logging in with BankID from the same device requires an intermediate redirect from the BankID app back to your application. The VaultITMobileSSOFramework will handle all this automatically as long as this parameter is supplied. The scheme must match your app's bundle id so just use ${PRODUCT_BUNDLE_IDENTIFIER}. | ${PRODUCT_BUNDLE_IDENTIFIER}://bankid_continue |
+| MobileSSOKeychainServiceName 	| You can leave this out (do not include in Info.plist) if you don't need keychain sharing. If you want to use keychain sharing however, this value needs to be same across all your apps sharing data. | "a_common_name_for_all_apps"                                                                                                       	|                                	|
+| MobileSSOKeychainAccessGroup 	| You can leave this out if you don't need keychain sharing. Sessions stored in the keychain can be shared with other apps in the same keychain access group. Go to the "Capabilities" tab of your project settings, enable keychain sharing and enter an access group name that is shared between all your apps. Then set this property as:$(AppIdentifierPrefix)group_namewhere "group_name" is the access group name you chose. The $(AppIdentifierPrefix) will resolve to your team id. 	| $(AppIdentifierPrefix)example_group_name                                                                       	|
 | MobileSSOClientSecret        	| This should be left empty in the Info.plist file. It will be added in the build phase.                                                                                                                                                                                                                                                                                                                                         	|                                                                        	|
 
 For a better example of a Info.plist file, see the demo app project.
@@ -122,13 +130,20 @@ If you want to share keychain data (in this case, sessions) between apps you sho
 ### Modify your AppDelegate
 
 To make single sign-on flow work, you must make some changes to your AppDelegate.
-First, make your *AppDelegate* implement the [VITMobileSSOAppDelegate](Protocols/VITMobileSSOAppDelegate.html) protocol by adding the following property:
+First, make your *AppDelegate* implement the [VITMobileSSOAppDelegate](Protocols/VITMobileSSOAppDelegate.html) protocol. FIrst import the VaultITMobileSSOFramework and AppAuth libraries
+
+```swift
+import VaultITMobileSSOFramework
+import AppAuth
+```
+
+Then make your AppDelegate conform to the VITMobileSSOAppDelegate protocol, and add the following property:
 
 ```swift
 var currentAuthFlow: OIDAuthorizationFlowSession?
 ```
 
-Additionally, you will need to implement the following app delegate method with the following contents to correctly handle login and logout redirects:
+Additionally, you will need to implement the login and logout redirect URL handling. Add the following method to your AppDelegate:
 
 ```swift
 func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
@@ -141,7 +156,7 @@ func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpe
 
     // Your additional URL handling (if any) goes here.
 
-    return false;
+    return false
 }
 ```
 
@@ -161,6 +176,17 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
     // Your other initialize code
 
     return true
+}
+```
+
+### Application resume
+
+When the app comes to foreground the framework will want to check for the session validity and update its state. Add [VITMobileSSO.willEnterForeground](Classes/VITMobileSSO.html) to the applicationWillEnterForeground method:
+
+```swift
+func applicationWillEnterForeground(_ application: UIApplication) {
+    // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    VITMobileSSO.willEnterForeground()
 }
 ```
 
@@ -263,7 +289,7 @@ If you would like to customize how this UI operation is handled, you can impleme
 
 ### Starting a login procedure
 
-If the session did not already exist, you make the user log in by calling the [VITSessionManager.shared.presentLogin](Classes/VITSessionManager.html) method. You must pass a presenting ViewController and optionally pass a number of OpenID scopes depending on your needs. The OpenID and Profile scopes are automatically included. Below is an example of a simple login call without any additional scopes:
+If the session did not already exist, you make the user log in by calling the [VITSessionManager.shared.presentLogin](Classes/VITSessionManager.html) method. You must pass a presenting ViewController and optionally pass a number of OpenID scopes depending on your needs. The *openid* and *profile* scopes are automatically included. Below is an example of a simple login call without any additional scopes:
 
 ```swift
 VITSessionManager.shared.presentLogin(in: self) { session, error in
@@ -275,7 +301,7 @@ VITSessionManager.shared.presentLogin(in: self) { session, error in
 For a more fine-grained control, a number of optional parameters can be supplied:
 
 ```swift
-let extraScopes = ["uapi_persons_get", "uapi_persons_id_get", "uapi_persons_search_id_get", "uapi_persons_id_photo_get"]
+let extraScopes = ["my_custom_backend_scope1", "my_custom_backend_scope2"]
 
 VITSessionManager.shared.presentLogin(in: self, extraScopes: extraScopes, stateCompletion: { state in
         /// This optional callback can be used to stay up-to-date with what is happening with the login process.
